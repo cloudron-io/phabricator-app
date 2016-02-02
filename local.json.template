@@ -1,0 +1,31 @@
+{
+    "storage.default-namespace": "##MYSQL_DATABASE_PREFIX",
+    "phabricator.base-uri": "##APP_ORIGIN",
+    "mysql.host": "##MYSQL_HOST",
+    "mysql.port": "##MYSQL_PORT",
+    "mysql.user": "##MYSQL_USERNAME",
+    "mysql.pass": "##MYSQL_PASSWORD",
+    "pygments.enabled": true,
+    "phabricator.timezone": "UTC",
+    "phabricator.serious-business": true,
+
+    "repository.default-local-path": "/app/data/repo",
+    "storage.local-disk.path": "/app/data/filestorage",
+
+    "metamta.default-address": "##MAIL_FROM",
+    "metamta.domain": "##MAIL_DOMAIN",
+    "metamta.mail-adapter": "PhabricatorMailImplementationPHPMailerAdapter",
+    "phpmailer.mailer": "smtp",
+    "phpmailer.smtp-host": "##MAIL_SERVER",
+    "phpmailer.smtp-port": ##MAIL_PORT,
+
+    "config.ignore-issues": {
+      "security.security.alternate-file-domain": true,
+      "php.memory_limit.upload": true,
+      "mysql.mode": true,
+      "mysql.ft_stopword_file": true,
+      "mysql.ft_boolean_syntax": true,
+      "mysql.innodb_buffer_pool_size": true
+    }
+}
+
