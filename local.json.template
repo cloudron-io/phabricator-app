@@ -21,6 +21,9 @@
 
     "auth.require-approval": false,
 
+    "phd.user": "phd",
+    "diffusion.ssh-user": "git",
+
     "config.ignore-issues": {
       "security.security.alternate-file-domain": true,
       "php.memory_limit.upload": true,

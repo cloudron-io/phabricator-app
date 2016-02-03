@@ -5,8 +5,16 @@ RUN mkdir -p /app/code
 WORKDIR /app/code
 
 RUN apt-get update && \
-    apt-get install python-pygments && \
+    apt-get install -y python-pygments subversion mercurial && \
     rm -r /var/cache/apt /var/lib/apt/lists
+
+# by default, git account is created as inactive which prevents login via openssh
+# https://github.com/gitlabhq/gitlabhq/issues/5304
+RUN adduser --disabled-login --gecos 'Git' git && passwd -d git
+RUN adduser --disabled-login --gecos 'Phabricator Deamon' phd
+
+# https://secure.phabricator.com/book/phabricator/article/diffusion_hosting
+RUN echo "git user ALL=(phd) SETENV: NOPASSWD: /usr/bin/git-upload-pack, /usr/bin/git-receive-pack, /usr/bin/hg, /usr/bin/svnserve" >> /etc/sudoers
 
 RUN mkdir libphutil && \
     cd libphutil && \
