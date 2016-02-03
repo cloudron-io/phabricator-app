@@ -17,6 +17,7 @@ RUN mkdir arcanist && \
     cd arcanist && \
     curl -L https://github.com/phacility/arcanist/archive/0553cb8d411817bcc40bd484ed8e209f4b870ff7.tar.gz | tar -xzf - --strip-components 1
 
+# if you update this, make a new dump.sql as well
 RUN mkdir phabricator && \
     cd phabricator && \
     curl -L https://github.com/phacility/phabricator/archive/71bda66870d8ef832f4d048b11282f9ae0086f05.tar.gz | tar -xzf - --strip-components 1
@@ -43,6 +44,7 @@ RUN sed -e 's/^upload_max_filesize = .*/upload_max_filesize = 32M/' \
         -e 's/;opcache.validate_timestamps=1/opcache.validate_timestamps=0/' \
         -i /etc/php5/apache2/php.ini
 
+ADD dump_71bda66870d8ef832f.sql /app/code/dump_71bda66870d8ef832f.sql
 ADD start.sh /app/code/start.sh
 
 CMD [ "/app/code/start.sh" ]
