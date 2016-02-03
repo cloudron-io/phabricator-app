@@ -12,7 +12,8 @@
     "mysql": {
       "multipleDatabases": true
     },
-    "sendmail": {}
+    "sendmail": {},
+    "ldap": {}
   },
   "targetBoxVersion": "0.4.0",
   "manifestVersion": 1,
