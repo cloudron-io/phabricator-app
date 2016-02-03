@@ -10,16 +10,16 @@ RUN apt-get update && \
 
 RUN mkdir libphutil && \
     cd libphutil && \
-    curl -L https://github.com/phacility/libphutil/archive/f43291e99d36045bc459e5133454c0d8fd8768ea.tar.gz | tar -xzf - --strip-components 1
+    curl -L https://github.com/phacility/libphutil/archive/9c472e7c9b64395424c6cd25734bf239cb3c113d.tar.gz | tar -xzf - --strip-components 1
 
 # cli for phabricator
 RUN mkdir arcanist && \
     cd arcanist && \
-    curl -L https://github.com/phacility/arcanist/archive/57f6fb59d73994d90cd94143787424ce0fdbf73b.tar.gz | tar -xzf - --strip-components 1
+    curl -L https://github.com/phacility/arcanist/archive/0553cb8d411817bcc40bd484ed8e209f4b870ff7.tar.gz | tar -xzf - --strip-components 1
 
 RUN mkdir phabricator && \
     cd phabricator && \
-    curl -L https://github.com/phacility/phabricator/archive/e4372e1276fddc5c19ae904062f86d625d10eaa4.tar.gz | tar -xzf - --strip-components 1
+    curl -L https://github.com/phacility/phabricator/archive/71bda66870d8ef832f4d048b11282f9ae0086f05.tar.gz | tar -xzf - --strip-components 1
 ADD local.json.template /app/code/phabricator/conf/local/local.json.template
 RUN ln -s /run/phabricator/local.json /app/code/phabricator/conf/local/local.json 
 
