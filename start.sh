@@ -2,7 +2,7 @@
 
 set -eu -o pipefail
 
-mkdir -p /run/phabricator
+mkdir -p /run/phabricator /run/sshd
 
 # Remove _ from the prefix since phabricator adds it anyway
 sed -e "s/##MYSQL_DATABASE_PREFIX/${MYSQL_DATABASE_PREFIX%_}/" \
@@ -15,9 +15,8 @@ sed -e "s/##MYSQL_DATABASE_PREFIX/${MYSQL_DATABASE_PREFIX%_}/" \
     -e "s,##MAIL_PORT,${MAIL_SMTP_PORT}," \
     -e "s/##MAIL_FROM/${MAIL_SMTP_USERNAME}@${MAIL_DOMAIN}/" \
     -e "s/##MAIL_DOMAIN/${MAIL_DOMAIN}/" \
+    -e "s/##SSH_PORT/${SSH_PORT}/" \
     /app/code/phabricator/conf/local/local.json.template > /run/phabricator/local.json
-
-chown -R cloudron:cloudron /run/phabricator
 
 # https://secure.phabricator.com/book/phabricator/article/configuring_file_storage/
 mkdir -p /app/data/filestorage /app/data/repo
@@ -48,8 +47,6 @@ fi
 echo "Starting daemons"
 /app/code/phabricator/bin/phd start
 
-echo "Starting apache"
-APACHE_CONFDIR="" source /etc/apache2/envvars
-rm -f "${APACHE_PID_FILE}"
-exec /usr/sbin/apache2 -DFOREGROUND
+echo "Starting supervisor"
+exec /usr/bin/supervisord --configuration /etc/supervisor/supervisord.conf --nodaemon -i Phabricator
 

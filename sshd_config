@@ -1,0 +1,22 @@
+# https://github.com/phacility/phabricator/blob/master/resources/sshd/sshd_config.phabricator.example
+
+AuthorizedKeysCommand /app/code/phabricator-ssh-hook.sh
+AuthorizedKeysCommandUser git
+AllowUsers git
+
+# You may need to tweak these options, but mostly they just turn off everything
+# dangerous.
+
+ListenAddress 0.0.0.0
+Port 29418
+Protocol 2
+PermitRootLogin no
+AllowAgentForwarding no
+AllowTcpForwarding no
+PrintMotd no
+PrintLastLog no
+PasswordAuthentication no
+AuthorizedKeysFile none
+
+PidFile /run/phabricator/sshd-phabricator.pid
+

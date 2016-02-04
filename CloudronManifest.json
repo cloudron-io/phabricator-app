@@ -15,6 +15,14 @@
     "sendmail": {},
     "ldap": {}
   },
+  "tcpPorts": {
+    "SSH_PORT": {
+      "title": "SSH Port",
+      "description": "SSH Port over which repos can be pushed & pulled",
+      "defaultValue": 29418,
+      "containerPort": 29418
+    }
+  },
   "targetBoxVersion": "0.4.0",
   "manifestVersion": 1,
   "website": "http://phabricator.org/",

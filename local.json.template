@@ -23,6 +23,7 @@
 
     "phd.user": "phd",
     "diffusion.ssh-user": "git",
+    "diffusion.ssh-port": ##SSH_PORT,
 
     "config.ignore-issues": {
       "security.security.alternate-file-domain": true,

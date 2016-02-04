@@ -5,7 +5,7 @@ RUN mkdir -p /app/code
 WORKDIR /app/code
 
 RUN apt-get update && \
-    apt-get install -y python-pygments subversion mercurial && \
+    apt-get install -y python-pygments subversion mercurial openssh-server && \
     rm -r /var/cache/apt /var/lib/apt/lists
 
 # by default, git account is created as inactive which prevents login via openssh
@@ -54,6 +54,10 @@ RUN sed -e 's/^upload_max_filesize = .*/upload_max_filesize = 32M/' \
 
 ADD dump_71bda66870d8ef832f.sql /app/code/dump_71bda66870d8ef832f.sql
 ADD start.sh /app/code/start.sh
+
+ADD sshd_config /app/code/sshd_config
+ADD phabricator-ssh-hook.sh /app/code/phabricator-ssh-hook.sh
+ADD supervisor/ /etc/supervisor/conf.d/
 
 CMD [ "/app/code/start.sh" ]
 
