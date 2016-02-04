@@ -4,7 +4,7 @@
   "author": "Phacility, Inc",
   "description": "file://DESCRIPTION.md",
   "tagline": "Phabricator, an open source, software development platform",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "healthCheckPath": "/",
   "httpPort": 8000,
   "addons": {
