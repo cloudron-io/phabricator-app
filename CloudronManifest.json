@@ -28,6 +28,5 @@
   "website": "http://phabricator.org/",
   "contactEmail": "support@cloudron.io",
   "icon": "",
-  "mediaLinks": [ ],
-  "developmentMode": true
+  "mediaLinks": [ ]
 }
