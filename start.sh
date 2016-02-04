@@ -45,7 +45,7 @@ else
 fi
 
 echo "Starting daemons"
-/app/code/phabricator/bin/phd start
+/usr/local/bin/gosu phd:phd /app/code/phabricator/bin/phd start
 
 echo "Starting supervisor"
 exec /usr/bin/supervisord --configuration /etc/supervisor/supervisord.conf --nodaemon -i Phabricator
