@@ -1,5 +1,19 @@
 Phabricator, an open source, software development platform
 
+### Administrator Setup
+
+The admin credentials are:
+
+`username`: superadmin
+`password`: changeme123
+
+The application is already setup for Cloudron LDAP.
+
+By default, you are presented with two login forms : LDAP form for the Cloudron users and username/login
+form for the superadmin. To fix this, **Login as admin and link the account to your LDAP account**. After 
+doing so, uncheck 'login' from the username/password auth provider. Doing so, will result in a single LDAP
+login form.
+
 ### Applications
 
 Phabricator includes applications for: 
