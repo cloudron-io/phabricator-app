@@ -23,6 +23,7 @@
       "containerPort": 29418
     }
   },
+  "memoryLimit": 2147483648,
   "targetBoxVersion": "0.4.0",
   "manifestVersion": 1,
   "website": "http://phabricator.org/",
