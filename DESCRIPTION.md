@@ -5,6 +5,7 @@ Phabricator, an open source, software development platform
 The admin credentials are:
 
 `username`: superadmin
+
 `password`: changeme123
 
 The application is already setup for Cloudron LDAP.
