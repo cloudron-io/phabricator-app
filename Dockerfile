@@ -57,6 +57,9 @@ ADD start.sh /app/code/start.sh
 
 ADD sshd_config /app/code/sshd_config
 ADD phabricator-ssh-hook.sh /app/code/phabricator-ssh-hook.sh
+
+# configure supervisor
+RUN sed -e 's,^logfile=.*$,logfile=/run/phabricator/supervisord.log,' -i /etc/supervisor/supervisord.conf
 ADD supervisor/ /etc/supervisor/conf.d/
 
 CMD [ "/app/code/start.sh" ]
