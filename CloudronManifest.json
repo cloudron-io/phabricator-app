@@ -1,10 +1,10 @@
 {
-  "id": "com.phabricator.cloudronapp",
+  "id": "org.phabricator.cloudronapp",
   "title": "Phabricator",
-  "author": "Phacility",
+  "author": "Phacility, Inc",
   "description": "file://DESCRIPTION.md",
   "tagline": "Phabricator, an open source, software development platform",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "healthCheckPath": "/",
   "httpPort": 8000,
   "addons": {
@@ -27,6 +27,11 @@
   "manifestVersion": 1,
   "website": "http://phabricator.org/",
   "contactEmail": "support@cloudron.io",
-  "icon": "",
-  "mediaLinks": [ ]
+  "icon": "logo.png",
+  "mediaLinks": [
+    "https://i.imgur.com/nSDOv7m.png",
+    "https://i.imgur.com/XTHwqh5.png",
+    "https://i.imgur.com/8zj6efc.png",
+    "https://i.imgur.com/1ljeDzV.png"
+  ]
 }
