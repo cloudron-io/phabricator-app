@@ -14,7 +14,7 @@ RUN adduser --disabled-login --gecos 'Git' git && passwd -d git
 RUN adduser --disabled-login --gecos 'Phabricator Deamon' phd
 
 # https://secure.phabricator.com/book/phabricator/article/diffusion_hosting
-RUN echo "git user ALL=(phd) SETENV: NOPASSWD: /usr/bin/git-upload-pack, /usr/bin/git-receive-pack, /usr/bin/hg, /usr/bin/svnserve" >> /etc/sudoers
+RUN echo "git ALL=(phd) SETENV: NOPASSWD: /usr/bin/git-upload-pack, /usr/bin/git-receive-pack, /usr/bin/hg, /usr/bin/svnserve" >> /etc/sudoers
 
 RUN mkdir libphutil && \
     cd libphutil && \
