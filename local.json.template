@@ -22,6 +22,9 @@
     "auth.require-approval": false,
 
     "phd.user": "phd",
+    "phd.pid-directory": "/run/phabricator/phd",
+    "phd.log-directory": "/run/phabricator/phd",
+
     "diffusion.ssh-user": "git",
     "diffusion.ssh-port": ##SSH_PORT,
 

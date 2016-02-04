@@ -2,7 +2,7 @@
 
 set -eu -o pipefail
 
-mkdir -p /run/phabricator /run/sshd
+mkdir -p /run/phabricator/phd /run/sshd
 
 # Remove _ from the prefix since phabricator adds it anyway
 sed -e "s/##MYSQL_DATABASE_PREFIX/${MYSQL_DATABASE_PREFIX%_}/" \
@@ -20,7 +20,7 @@ sed -e "s/##MYSQL_DATABASE_PREFIX/${MYSQL_DATABASE_PREFIX%_}/" \
 
 # https://secure.phabricator.com/book/phabricator/article/configuring_file_storage/
 mkdir -p /app/data/filestorage /app/data/repo
-chown -R phd:phd /app/data/repo
+chown -R phd:phd /app/data/repo /run/phabricator/phd
 chown -R www-data:www-data /app/data/filestorage
 
 # import the database with default 'superadmin' user
