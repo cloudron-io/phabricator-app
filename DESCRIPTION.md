@@ -11,9 +11,9 @@ The admin credentials are:
 The application is already setup for Cloudron LDAP.
 
 By default, you are presented with two login forms : LDAP form for the Cloudron users and username/login
-form for the superadmin. To fix this, **Login as admin and link the account to your LDAP account**. After 
-doing so, uncheck 'login' from the username/password auth provider. Doing so, will result in a single LDAP
-login form.
+form for the superadmin. To fix this, **Login as admin and link the account to your LDAP account**
+(`People` -> `Edit Settings` -> `External Accounts`). After doing so, uncheck 'login' from the
+username/password auth provider. Doing so, will result in a single LDAP login form.
 
 ### Applications
 
