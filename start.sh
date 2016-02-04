@@ -44,6 +44,7 @@ else
     echo "Failed to setup LDAP authentication"
 fi
 
+# TODO: roll this as a supervisor script (http://blog.spang.cc/posts/running_phd_under_supervisor/)
 echo "Starting daemons"
 /usr/local/bin/gosu phd:phd /app/code/phabricator/bin/phd start
 
