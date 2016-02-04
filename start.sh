@@ -20,7 +20,8 @@ sed -e "s/##MYSQL_DATABASE_PREFIX/${MYSQL_DATABASE_PREFIX%_}/" \
 
 # https://secure.phabricator.com/book/phabricator/article/configuring_file_storage/
 mkdir -p /app/data/filestorage /app/data/repo
-chown -R www-data:www-data /app/data
+chown -R phd:phd /app/data/repo
+chown -R www-data:www-data /app/data/filestorage
 
 # import the database with default 'superadmin' user
 if [[ ! -f /app/data/imported ]]; then
@@ -46,7 +47,7 @@ fi
 
 # TODO: roll this as a supervisor script (http://blog.spang.cc/posts/running_phd_under_supervisor/)
 echo "Starting daemons"
-/usr/local/bin/gosu phd:phd /app/code/phabricator/bin/phd start
+/usr/local/bin/gosu phd:phd /app/code/phabricator/bin/phd restart
 
 echo "Starting supervisor"
 exec /usr/bin/supervisord --configuration /etc/supervisor/supervisord.conf --nodaemon -i Phabricator
