@@ -1,6 +1,6 @@
 Phabricator, an open source, software development platform
 
-### Administrator Setup
+### Accounts
 
 The admin credentials are:
 
@@ -10,10 +10,15 @@ The admin credentials are:
 
 The application is already setup for Cloudron LDAP.
 
-By default, you are presented with two login forms : LDAP form for the Cloudron users and username/login
-form for the superadmin. To fix this, **Login as admin and link the account to your LDAP account**
-(`People` -> `Edit Settings` -> `External Accounts`). After doing so, uncheck 'login' from the
-username/password auth provider. Doing so, will result in a single LDAP login form.
+Post installation, you are presented with two login forms:
+* LDAP form for the Cloudron users
+* Username/login form for the `superadmin` user above
+
+You can disable the username/login form and use LDAP exclusively as follows:
+* Login as `superadmin` and link the account to your LDAP account. See 
+`People` -> `Edit Settings` -> `External Accounts`).
+* Once linked, uncheck 'Login Allowed' from the username/password auth 
+provider.
 
 ### Applications
 
