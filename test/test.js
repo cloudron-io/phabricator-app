@@ -111,7 +111,7 @@ describe('Application life cycle test', function () {
         browser.findElement(by.xpath('//input[@name="ldap_username" and @type="text"]')).sendKeys(username);
         browser.findElement(by.xpath('//input[@name="ldap_password" and @type="password"]')).sendKeys(password);
         browser.findElement(by.xpath('//button[contains(text(), "Login or Register")]')).click();
-        browser.findElement(by.xpath('//span[contains(text(), "Differential")]')).then(function () { done(); });
+        browser.wait(until.elementLocated(by.xpath('//span[contains(text(), "Differential")]')), 1000).then(function() { done(); });
     });
 
     it('can create a maniphest task', function (done) {
@@ -236,13 +236,13 @@ describe('Application life cycle test', function () {
     });
 
     it('has the task', function (done) {
-        browser.get('https://' + app.fqdn + '/T1/');
+        browser.get('https://' + app.fqdn + '/T1');
         browser.findElement(by.xpath('//span[contains(text(), "this is a task")]')).then(function () { done(); });
     });
 
     it('has the file', function (done) {
-        browser.get('https://' + app.fqdn + '/F3/');
-        browser.findElement(by.xpath('//span[contains(text(), "logo.png")]')).then(function () { done(); });
+        browser.get('https://' + app.fqdn + '/F3');
+        browser.findElement(by.xpath('//span[contains(text(), "bigfile.txt")]')).then(function () { done(); });
     });
 
     it('move to different location', function () {
@@ -259,7 +259,7 @@ describe('Application life cycle test', function () {
         browser.findElement(by.xpath('//input[@name="ldap_username" and @type="text"]')).sendKeys(username);
         browser.findElement(by.xpath('//input[@name="ldap_password" and @type="password"]')).sendKeys(password);
         browser.findElement(by.xpath('//button[contains(text(), "Login or Register")]')).click();
-        browser.findElement(by.xpath('//span[contains(text(), "Differential")]')).then(function () { done(); });
+        browser.wait(until.elementLocated(by.xpath('//span[contains(text(), "Differential")]')), 1000).then(function() { done(); });
     });
 
     it('displays correct clone url', function (done) {
@@ -280,13 +280,13 @@ describe('Application life cycle test', function () {
     });
 
     it('has the task', function (done) {
-        browser.get('https://' + app.fqdn + '/T1/');
+        browser.get('https://' + app.fqdn + '/T1');
         browser.findElement(by.xpath('//span[contains(text(), "this is a task")]')).then(function () { done(); });
     });
 
     it('has the file', function (done) {
-        browser.get('https://' + app.fqdn + '/F3/');
-        browser.findElement(by.xpath('//span[contains(text(), "logo.png")]')).then(function () { done(); });
+        browser.get('https://' + app.fqdn + '/F3');
+        browser.findElement(by.xpath('//span[contains(text(), "bigfile.txt")]')).then(function () { done(); });
     });
 
     it('uninstall app', function () {
