@@ -23,7 +23,7 @@ cloudron build
 cloudron install
 ```
 
-## Creating the SQL dump
+## Why the SQL dump
 
 A Phabricator admin needs to enable one of the auth methods on installation. In a Cloudron app, we want to auto-enable and
 configure LDAP. This is tricky because Phabricator does not allow the admin user to login anymore if we setup LDAP
@@ -36,6 +36,18 @@ To hack this:
 * Dump the sql database
 * Import this database on first run
 * This approach allows the admin user to link to an LDAP account and grant admin previleges to others.
+
+## Creating the SQL Dump
+
+* Start in `developmentMode`
+* `cloudron exec -- /app/code/start.sh --no-import-db`
+* `cloudron open` to create administrator account
+  * Username `superadmin`
+  * Password `changeme123`
+  * email as `admin@server.test`
+* In another shell, `cloudron exec -- bash -c 'mysqldump --all-databases -h${MYSQL_HOST} -u${MYSQL_USERNAME} -p${MYSQL_PASSWORD}' > db_seed.sql`
+* `DB_PREFIX=$(cloudron exec -- bash -c 'echo $MYSQL_DATABASE_PREFIX')`
+* `sed -e "s/\`${DB_PREFIX}/\`dbprefixgoeshere_/" db_seed.sql`
 
 ## Testing
 

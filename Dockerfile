@@ -54,15 +54,15 @@ RUN sed -e 's/^upload_max_filesize = .*/upload_max_filesize = 32M/' \
         -e 's/;opcache.validate_timestamps=1/opcache.validate_timestamps=0/' \
         -i /etc/php5/apache2/php.ini
 
-ADD dump_71bda66870d8ef832f.sql /app/code/dump_71bda66870d8ef832f.sql
-ADD start.sh /app/code/start.sh
+# configure supervisor
+RUN sed -e 's,^logfile=.*$,logfile=/run/phabricator/supervisord.log,' -i /etc/supervisor/supervisord.conf
+ADD supervisor/ /etc/supervisor/conf.d/
 
 ADD sshd_config /app/code/sshd_config
 ADD phabricator-ssh-hook.sh /app/code/phabricator-ssh-hook.sh
 
-# configure supervisor
-RUN sed -e 's,^logfile=.*$,logfile=/run/phabricator/supervisord.log,' -i /etc/supervisor/supervisord.conf
-ADD supervisor/ /etc/supervisor/conf.d/
+ADD start.sh /app/code/start.sh
+ADD db_seed.sql /app/code/db_seed.sql
 
 CMD [ "/app/code/start.sh" ]
 

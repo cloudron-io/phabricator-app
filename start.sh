@@ -24,9 +24,11 @@ chown -R phd:phd /app/data/repo /run/phabricator/phd
 chown -R www-data:www-data /app/data/filestorage
 
 # import the database with default 'superadmin' user
-if [[ ! -f /app/data/imported ]]; then
+if [[ "$1" == "--no-import-db" ]]; then
+    echo "Skipping initial db import for creating db seed file"
+elif [[ ! -f /app/data/imported ]]; then
     echo "Importing initial data"
-    sed -e "s/\`c426f39125b21bba_/\`${MYSQL_DATABASE_PREFIX}/" /app/code/dump_71bda66870d8ef832f.sql | mysql -u"${MYSQL_USERNAME}" -p"${MYSQL_PASSWORD}" -h "${MYSQL_HOST}" -P "${MYSQL_PORT}"
+    sed -e "s/\`dbprefixgoeshere_/\`${MYSQL_DATABASE_PREFIX}/" /app/code/db_seed.sql | mysql -u"${MYSQL_USERNAME}" -p"${MYSQL_PASSWORD}" -h "${MYSQL_HOST}" -P "${MYSQL_PORT}"
     touch /app/data/imported
 else
     echo "Already initialized"
