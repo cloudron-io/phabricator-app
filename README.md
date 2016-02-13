@@ -45,6 +45,9 @@ To hack this:
   * Username `superadmin`
   * Password `changeme123`
   * email as `admin@server.test`
+* Setup the auth providers (in the exact order as below)
+  * Add username/password provider (just add with defaults)
+  * Add LDAP provider (leave everything empty, just add with defaults)
 * Stop the previous `cloudron exec`
 * In another shell, `cloudron exec -- bash -c 'mysqldump --all-databases -h${MYSQL_HOST} -u${MYSQL_USERNAME} -p${MYSQL_PASSWORD}' > db_seed.sql`
 * `DB_PREFIX=$(cloudron exec -- bash -c 'echo $MYSQL_DATABASE_PREFIX')`
