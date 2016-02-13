@@ -24,7 +24,7 @@ chown -R phd:phd /app/data/repo /run/phabricator/phd
 chown -R www-data:www-data /app/data/filestorage
 
 # import the database with default 'superadmin' user
-if [[ "$1" == "--no-import-db" ]]; then
+if [ $# -gt 0 ] && [[ "$1" == "--no-import-db" ]]; then
     echo "Skipping initial db import for creating db seed file"
 elif [[ ! -f /app/data/imported ]]; then
     echo "Importing initial data"
