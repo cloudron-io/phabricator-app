@@ -4,3 +4,6 @@
 [0.1.1]
 * Fix memory limit
 
+[0.2.0]
+* Use stable branch 2016 Week 7
+
