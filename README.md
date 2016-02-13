@@ -45,9 +45,14 @@ To hack this:
   * Username `superadmin`
   * Password `changeme123`
   * email as `admin@server.test`
+* Stop the previous `cloudron exec`
 * In another shell, `cloudron exec -- bash -c 'mysqldump --all-databases -h${MYSQL_HOST} -u${MYSQL_USERNAME} -p${MYSQL_PASSWORD}' > db_seed.sql`
 * `DB_PREFIX=$(cloudron exec -- bash -c 'echo $MYSQL_DATABASE_PREFIX')`
-* `sed -e "s/\`${DB_PREFIX}/\`dbprefixgoeshere_/" db_seed.sql`
+* Finally,
+```
+    sed -e "s/\`${DB_PREFIX}/\`dbprefixgoeshere_/" -i db_seed.sql
+```
+* Commit db_seed.sql
 
 ## Testing
 
