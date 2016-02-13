@@ -156,7 +156,7 @@ describe('Application life cycle test', function () {
                 return url === 'https://' + app.fqdn + '/diffusion/TR/edit/';
             });
         }, 40000);
-        browser.sleep(10000).then(function () { done(); }); // it takes sometime for the repo to get created
+        browser.sleep(20000).then(function () { done(); }); // it takes sometime for the repo to get created
     });
 
     it('displays correct clone url', function (done) {
@@ -192,12 +192,13 @@ describe('Application life cycle test', function () {
 
     it('can upload a file', function (done) {
         browser.get('https://' + app.fqdn + '/file/upload');
-        browser.findElement(by.xpath('//input[@type="file" and @name="file"]')).sendKeys(path.resolve(__dirname, '../logo.png'));
+        execSync('truncate -s 2M /tmp/bigfile.txt'); // if it's < 1M it is stored in sql db. so create something big enough
+        browser.findElement(by.xpath('//input[@type="file" and @name="file"]')).sendKeys('/tmp/bigfile.txt');
         browser.findElement(by.xpath('//button[contains(text(), "Upload")]')).click();
 
         browser.wait(function () {
             return browser.getCurrentUrl().then(function (url) {
-                return url === 'https://' + app.fqdn + '/F1';
+                return url === 'https://' + app.fqdn + '/F3';
             });
         }, 40000).then(function () { done(); });
 
@@ -234,13 +235,13 @@ describe('Application life cycle test', function () {
         done();
     });
 
-    it('has the task', function () {
+    it('has the task', function (done) {
         browser.get('https://' + app.fqdn + '/T1/');
         browser.findElement(by.xpath('//span[contains(text(), "this is a task")]')).then(function () { done(); });
     });
 
-    it('has the file', function () {
-        browser.get('https://' + app.fqdn + '/F1/');
+    it('has the file', function (done) {
+        browser.get('https://' + app.fqdn + '/F3/');
         browser.findElement(by.xpath('//span[contains(text(), "logo.png")]')).then(function () { done(); });
     });
 
@@ -278,13 +279,13 @@ describe('Application life cycle test', function () {
         done();
     });
 
-    it('has the task', function () {
+    it('has the task', function (done) {
         browser.get('https://' + app.fqdn + '/T1/');
         browser.findElement(by.xpath('//span[contains(text(), "this is a task")]')).then(function () { done(); });
     });
 
-    it('has the file', function () {
-        browser.get('https://' + app.fqdn + '/F1/');
+    it('has the file', function (done) {
+        browser.get('https://' + app.fqdn + '/F3/');
         browser.findElement(by.xpath('//span[contains(text(), "logo.png")]')).then(function () { done(); });
     });
 
