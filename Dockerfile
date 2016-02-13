@@ -26,7 +26,7 @@ RUN mkdir arcanist && \
     cd arcanist && \
     curl -L https://github.com/phacility/arcanist/archive/ed476cf8489c4bf41b7a0075f15d40820d640fe4.tar.gz | tar -xzf - --strip-components 1
 
-# if you update this, make a new dump.sql as well
+# if you update this, make a new db_seed.sql as well
 # (stable) Promote 2016 Week 7
 RUN mkdir phabricator && \
     cd phabricator && \
