@@ -37,7 +37,7 @@ echo "Upgrading database"
 
 readonly ldap_config="{\"ldap:port\":\"${LDAP_PORT}\",\"ldap:version\":\"3\",\"ldap:host\":\"${LDAP_SERVER}\",\"ldap:dn\":\"${LDAP_USERS_BASE_DN}\",\"ldap:search-attribute\":\"cn\",\"ldap:anoynmous-username\":\"${LDAP_BIND_DN}\",\"ldap:anonymous-password\":\"${LDAP_BIND_PASSWORD}\",\"ldap:username-attribute\":\"cn\",\"ldap:realname-attributes\":[\"displayname\"],\"ldap:activedirectory-domain\":\"\"}"
 
-# update only on id 2 (id 1 is username/password). this allows the user to disable it
+# update only on id 2 (id 1 is username/password). this allows the user to disable LDAP auth
 if mysql -u"${MYSQL_USERNAME}" -p"${MYSQL_PASSWORD}" -h "${MYSQL_HOST}" -P "${MYSQL_PORT}" --database="${MYSQL_DATABASE_PREFIX}auth" \
      -e "UPDATE \`auth_providerconfig\` SET properties='${ldap_config}' WHERE id=2 AND providerClass='PhabricatorLDAPAuthProvider';"; then
     echo "LDAP configuration auto setup successfully"
