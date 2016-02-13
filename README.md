@@ -29,7 +29,7 @@ A Phabricator admin needs to enable one of the auth methods on installation. In 
 configure LDAP. This is tricky because Phabricator does not allow the admin user to login anymore if we setup LDAP
 automatically. This leaves a system with no admin user. (admin user required to enable various permisions).
 
-See https://secure.phabricator.com/T8282
+See https://secure.phabricator.com/T8282 and https://secure.phabricator.com/T5310
 
 To hack this:
 * We create an admin user
