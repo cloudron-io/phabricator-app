@@ -222,7 +222,7 @@ describe('Application life cycle test', function () {
         execSync('cloudron backup --app ' + app.id, { cwd: path.resolve(__dirname, '..'), stdio: 'inherit' });
     });
 
-    xit('restore app', function () {
+    it('restore app', function () {
         execSync('cloudron restore --app ' + app.id, { cwd: path.resolve(__dirname, '..'), stdio: 'inherit' });
     });
 
