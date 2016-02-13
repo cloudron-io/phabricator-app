@@ -122,7 +122,7 @@ describe('Application life cycle test', function () {
             return browser.getCurrentUrl().then(function (url) {
                 return url === 'https://' + app.fqdn + '/T1';
             });
-        }, 40000).then(function () { done(); });
+        }, 4000).then(function () { done(); });
     });
 
     it('can add public key', function (done) {
@@ -190,6 +190,19 @@ describe('Application life cycle test', function () {
         done();
     });
 
+    it('can upload a file', function (done) {
+        browser.get('https://' + app.fqdn + '/file/upload');
+        browser.findElement(by.xpath('//input[@type="file" and @name="file"]')).sendKeys(path.resolve(__dirname, '../logo.png'));
+        browser.findElement(by.xpath('//button[contains(text(), "Upload")]')).click();
+
+        browser.wait(function () {
+            return browser.getCurrentUrl().then(function (url) {
+                return url === 'https://' + app.fqdn + '/F1';
+            });
+        }, 40000).then(function () { done(); });
+
+    });
+
     it('can restart app', function (done) {
         execSync('cloudron restart');
         done();
@@ -224,6 +237,11 @@ describe('Application life cycle test', function () {
     it('has the task', function () {
         browser.get('https://' + app.fqdn + '/T1/');
         browser.findElement(by.xpath('//span[contains(text(), "this is a task")]')).then(function () { done(); });
+    });
+
+    it('has the file', function () {
+        browser.get('https://' + app.fqdn + '/F1/');
+        browser.findElement(by.xpath('//span[contains(text(), "logo.png")]')).then(function () { done(); });
     });
 
     it('move to different location', function () {
@@ -263,6 +281,11 @@ describe('Application life cycle test', function () {
     it('has the task', function () {
         browser.get('https://' + app.fqdn + '/T1/');
         browser.findElement(by.xpath('//span[contains(text(), "this is a task")]')).then(function () { done(); });
+    });
+
+    it('has the file', function () {
+        browser.get('https://' + app.fqdn + '/F1/');
+        browser.findElement(by.xpath('//span[contains(text(), "logo.png")]')).then(function () { done(); });
     });
 
     it('uninstall app', function () {
