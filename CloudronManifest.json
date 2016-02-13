@@ -35,6 +35,6 @@
     "https://i.imgur.com/8zj6efc.png",
     "https://i.imgur.com/1ljeDzV.png"
   ],
-  "tags": [ "git", "wiki", "chat", "project", "mercurial", "svn", "bugs", "tasks" ],
+  "tags": [ "git", "wiki", "chat", "project", "mercurial", "svn", "bugs", "tasks", "code review" ],
   "changelog": "file://CHANGELOG"
 }
