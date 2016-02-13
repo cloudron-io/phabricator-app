@@ -155,12 +155,12 @@ describe('Application life cycle test', function () {
             return browser.getCurrentUrl().then(function (url) {
                 return url === 'https://' + app.fqdn + '/diffusion/TR/edit/';
             });
-        }, 40000).then(function () { done(); });
+        }, 40000);
+        browser.sleep(10000).then(function () { done(); }); // it takes sometime for the repo to get created
     });
 
     it('displays correct clone url', function (done) {
         browser.get('https://' + app.fqdn + '/diffusion/TR/');
-        browser.sleep(1000);
         browser.findElement(by.xpath('//input[@type="text" and @class="diffusion-clone-uri"]')).getAttribute('value').then(function (cloneUrl) {
             expect(cloneUrl).to.be('git clone ssh://git@' + app.fqdn + ':29418/diffusion/TR/testrepo.git');
             done();
@@ -221,6 +221,11 @@ describe('Application life cycle test', function () {
         done();
     });
 
+    it('has the task', function () {
+        browser.get('https://' + app.fqdn + '/T1/');
+        browser.findElement(by.xpath('//span[contains(text(), "this is a task")]')).then(function () { done(); });
+    });
+
     it('move to different location', function () {
         browser.manage().deleteAllCookies();
         execSync('cloudron install --wait --location ' + LOCATION + '2', { cwd: path.resolve(__dirname, '..'), stdio: 'inherit' });
@@ -253,6 +258,11 @@ describe('Application life cycle test', function () {
         expect(fs.existsSync(repodir + '/newfile')).to.be(true);
         rimraf.sync(repodir);
         done();
+    });
+
+    it('has the task', function () {
+        browser.get('https://' + app.fqdn + '/T1/');
+        browser.findElement(by.xpath('//span[contains(text(), "this is a task")]')).then(function () { done(); });
     });
 
     it('uninstall app', function () {
