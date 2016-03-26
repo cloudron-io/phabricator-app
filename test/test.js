@@ -140,9 +140,9 @@ describe('Application life cycle test', function () {
         browser.get('https://' + app.fqdn + '/diffusion/create/');
         browser.findElement(by.xpath('//label[.="Git"]')).click(); // "." means innerText apparently
         browser.findElement(by.xpath('//input[@type="submit"]')).click();
+
         browser.findElement(by.xpath('//input[@name="name" and @type="text"]')).sendKeys('testrepo');
-        browser.findElement(by.xpath('//input[@name="callsign" and @type="text"]')).sendKeys('TR');
-        browser.findElement(by.xpath('//input[@type="submit"]')).click(); // continue...
+        browser.findElement(by.xpath('//input[@type="submit"]')).click();
 
         browser.sleep(1000);
         browser.findElement(by.xpath('//input[@type="submit"]')).click(); // permissions
@@ -153,16 +153,16 @@ describe('Application life cycle test', function () {
 
         browser.wait(function () {
             return browser.getCurrentUrl().then(function (url) {
-                return url === 'https://' + app.fqdn + '/diffusion/TR/edit/';
+                return url === 'https://' + app.fqdn + '/diffusion/1/edit/';
             });
         }, 40000);
         browser.sleep(20000).then(function () { done(); }); // it takes sometime for the repo to get created
     });
 
     it('displays correct clone url', function (done) {
-        browser.get('https://' + app.fqdn + '/diffusion/TR/');
+        browser.get('https://' + app.fqdn + '/diffusion/1/');
         browser.findElement(by.xpath('//input[@type="text" and @class="diffusion-clone-uri"]')).getAttribute('value').then(function (cloneUrl) {
-            expect(cloneUrl).to.be('git clone ssh://git@' + app.fqdn + ':29418/diffusion/TR/testrepo.git');
+            expect(cloneUrl).to.be('git clone ssh://git@' + app.fqdn + ':29418/diffusion/1/testrepo.git');
             done();
         });
     });
@@ -170,21 +170,21 @@ describe('Application life cycle test', function () {
     it('can push to repo', function (done) {
         var env = Object.create(process.env);
         env.GIT_SSH = __dirname + '/git_ssh_wrapper.sh';
-        execSync('git push -f ssh://git@' + app.fqdn + ':29418/diffusion/TR/testrepo.git master', { env: env }); // push this repo
+        execSync('git push -f ssh://git@' + app.fqdn + ':29418/diffusion/1/testrepo.git master', { env: env }); // push this repo
         done();
     });
 
     it('can clone the url', function (done) {
         var env = Object.create(process.env);
         env.GIT_SSH = __dirname + '/git_ssh_wrapper.sh';
-        execSync('git clone ssh://git@' + app.fqdn + ':29418/diffusion/TR/testrepo.git ' + repodir, { env: env });
+        execSync('git clone ssh://git@' + app.fqdn + ':29418/diffusion/1/testrepo.git ' + repodir, { env: env });
         done();
     });
 
     it('can add and push a file', function (done) {
         var env = Object.create(process.env);
         env.GIT_SSH = __dirname + '/git_ssh_wrapper.sh';
-        execSync('touch newfile && git add newfile && git commit -a -mx && git push ssh://git@' + app.fqdn + ':29418/diffusion/TR/testrepo.git master',
+        execSync('touch newfile && git add newfile && git commit -a -mx && git push ssh://git@' + app.fqdn + ':29418/diffusion/1/testrepo.git master',
                  { env: env, cwd: repodir });
         rimraf.sync('/tmp/testrepo');
         done();
@@ -212,7 +212,7 @@ describe('Application life cycle test', function () {
     it('can clone the url', function (done) {
         var env = Object.create(process.env);
         env.GIT_SSH = __dirname + '/git_ssh_wrapper.sh';
-        execSync('git clone ssh://git@' + app.fqdn + ':29418/diffusion/TR/testrepo.git ' + repodir, { env: env });
+        execSync('git clone ssh://git@' + app.fqdn + ':29418/diffusion/1/testrepo.git ' + repodir, { env: env });
         expect(fs.existsSync(repodir + '/newfile')).to.be(true);
         rimraf.sync(repodir);
         done();
@@ -229,7 +229,7 @@ describe('Application life cycle test', function () {
     it('can clone the url', function (done) {
         var env = Object.create(process.env);
         env.GIT_SSH = __dirname + '/git_ssh_wrapper.sh';
-        execSync('git clone ssh://git@' + app.fqdn + ':29418/diffusion/TR/testrepo.git ' + repodir, { env: env });
+        execSync('git clone ssh://git@' + app.fqdn + ':29418/diffusion/1/testrepo.git ' + repodir, { env: env });
         expect(fs.existsSync(repodir + '/newfile')).to.be(true);
         rimraf.sync(repodir);
         done();
@@ -263,9 +263,9 @@ describe('Application life cycle test', function () {
     });
 
     it('displays correct clone url', function (done) {
-        browser.get('https://' + app.fqdn + '/diffusion/TR/');
+        browser.get('https://' + app.fqdn + '/diffusion/1/');
         browser.findElement(by.xpath('//input[@type="text" and @class="diffusion-clone-uri"]')).getAttribute('value').then(function (cloneUrl) {
-            expect(cloneUrl).to.be('git clone ssh://git@' + app.fqdn + ':29418/diffusion/TR/testrepo.git');
+            expect(cloneUrl).to.be('git clone ssh://git@' + app.fqdn + ':29418/diffusion/1/testrepo.git');
             done();
         });
     });
@@ -273,7 +273,7 @@ describe('Application life cycle test', function () {
     it('can clone the url', function (done) {
         var env = Object.create(process.env);
         env.GIT_SSH = __dirname + '/git_ssh_wrapper.sh';
-        execSync('git clone ssh://git@' + app.fqdn + ':29418/diffusion/TR/testrepo.git ' + repodir, { env: env });
+        execSync('git clone ssh://git@' + app.fqdn + ':29418/diffusion/1/testrepo.git ' + repodir, { env: env });
         expect(fs.existsSync(repodir + '/newfile')).to.be(true);
         rimraf.sync(repodir);
         done();

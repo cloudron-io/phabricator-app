@@ -16,21 +16,21 @@ RUN adduser --disabled-login --gecos 'Phabricator Deamon' phd
 # https://secure.phabricator.com/book/phabricator/article/diffusion_hosting
 RUN echo "git ALL=(phd) SETENV: NOPASSWD: /usr/bin/git-upload-pack, /usr/bin/git-receive-pack, /usr/bin/hg, /usr/bin/svnserve" >> /etc/sudoers
 
-# (stable) Promote 2016 Week 4
+# (stable) Promote 2016 Week 12
 RUN mkdir libphutil && \
     cd libphutil && \
-    curl -L https://github.com/phacility/libphutil/archive/9c472e7c9b64395424c6cd25734bf239cb3c113d.tar.gz | tar -xzf - --strip-components 1
+    curl -L https://github.com/phacility/libphutil/archive/84b0feab42206c0d53560f4e340fb05075fed365.tar.gz | tar -xzf - --strip-components 1
 
-# (stable) Promote 2016 Week 7
+# (stable) Promote 2016 Week 12
 RUN mkdir arcanist && \
     cd arcanist && \
-    curl -L https://github.com/phacility/arcanist/archive/ed476cf8489c4bf41b7a0075f15d40820d640fe4.tar.gz | tar -xzf - --strip-components 1
+    curl -L https://github.com/phacility/arcanist/archive/f89f3de65805f7f65c8082ed387e8e2572596f7a.tar.gz | tar -xzf - --strip-components 1
 
 # if you update this, make a new db_seed.sql as well
-# (stable) Promote 2016 Week 7
+# (stable) Promote 2016 Week 12
 RUN mkdir phabricator && \
     cd phabricator && \
-    curl -L https://github.com/phacility/phabricator/archive/70c679110e1d4632d19ca160379f83f6f20d79d1.tar.gz | tar -xzf - --strip-components 1
+    curl -L https://github.com/phacility/phabricator/archive/741e2ef4b1150f9a9e4b121218b3ea536289968d.tar.gz | tar -xzf - --strip-components 1
 ADD local.json.template /app/code/phabricator/conf/local/local.json.template
 RUN ln -s /run/phabricator/local.json /app/code/phabricator/conf/local/local.json 
 
