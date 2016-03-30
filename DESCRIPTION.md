@@ -20,6 +20,15 @@ You can disable the username/login form and use LDAP exclusively as follows:
 * Once linked, uncheck 'Login Allowed' from the username/password auth 
 provider.
 
+### FAQ
+
+* How can I upload large files?
+
+This app is configured to accept files upto 512MB. Note that large files need to be
+dragged and dropped (instead of the file upload button).
+
+See https://secure.phabricator.com/Q216.
+
 ### Applications
 
 Phabricator includes applications for: 
