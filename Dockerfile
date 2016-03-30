@@ -47,8 +47,8 @@ RUN echo "Listen 8000" > /etc/apache2/ports.conf
 # configure mod_php
 RUN a2enmod php5
 RUN a2enmod rewrite
-RUN sed -e 's/^upload_max_filesize = .*/upload_max_filesize = 32M/' \
-        -e 's/^post_max_size = .*/post_max_size = 32M/' \
+RUN sed -e 's/^upload_max_filesize = .*/upload_max_filesize = 512M/' \
+        -e 's/^post_max_size = .*/post_max_size = 512M/' \
         -e 's/^memory_limit = .*/memory_limit = -1/' \
         -e 's,;session.save_path.*,session.save_path = "/run/phabricator/sessions",' \
         -e 's/;opcache.validate_timestamps=1/opcache.validate_timestamps=0/' \
