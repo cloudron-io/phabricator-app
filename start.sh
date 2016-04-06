@@ -37,7 +37,7 @@ fi
 echo "Upgrading database"
 /app/code/phabricator/bin/storage upgrade --force
 
-readonly ldap_config="{\"ldap:port\":\"${LDAP_PORT}\",\"ldap:version\":\"3\",\"ldap:host\":\"${LDAP_SERVER}\",\"ldap:dn\":\"${LDAP_USERS_BASE_DN}\",\"ldap:search-attribute\":\"cn\",\"ldap:anoynmous-username\":\"${LDAP_BIND_DN}\",\"ldap:anonymous-password\":\"${LDAP_BIND_PASSWORD}\",\"ldap:username-attribute\":\"cn\",\"ldap:realname-attributes\":[\"displayname\"],\"ldap:activedirectory-domain\":\"\"}"
+readonly ldap_config="{\"ldap:port\":\"${LDAP_PORT}\",\"ldap:version\":\"3\",\"ldap:host\":\"${LDAP_SERVER}\",\"ldap:dn\":\"${LDAP_USERS_BASE_DN}\",\"ldap:search-attribute\":\"(|(username=\${login})(mail=\${login}))\",\"ldap:anoynmous-username\":\"${LDAP_BIND_DN}\",\"ldap:anonymous-password\":\"${LDAP_BIND_PASSWORD}\",\"ldap:username-attribute\":\"username\",\"ldap:realname-attributes\":[\"displayname\"],\"ldap:activedirectory-domain\":\"\"}"
 
 # update only on id 2 (id 1 is username/password). this allows the user to disable LDAP auth
 if mysql -u"${MYSQL_USERNAME}" -p"${MYSQL_PASSWORD}" -h "${MYSQL_HOST}" -P "${MYSQL_PORT}" --database="${MYSQL_DATABASE_PREFIX}auth" \
