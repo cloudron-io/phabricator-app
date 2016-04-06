@@ -10,3 +10,6 @@
 [0.3.0]
 * Use stable branch 2016 Week 12
 
+[0.3.1]
+* Use username for login instead of id
+
