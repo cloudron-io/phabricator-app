@@ -34,6 +34,7 @@ describe('Application life cycle test', function () {
     var username = process.env.USERNAME;
     var password = process.env.PASSWORD;
     var superadmin_username = 'superadmin', superadmin_password = 'changeme123';
+    var email, token;
 
     before(function (done) {
         if (!process.env.USERNAME) return done(new Error('USERNAME env var not set'));
@@ -58,6 +59,29 @@ describe('Application life cycle test', function () {
 
     xit('build app', function () {
         execSync('cloudron build', { cwd: path.resolve(__dirname, '..'), stdio: 'inherit' });
+    });
+
+    it('can login', function (done) {
+        var inspect = JSON.parse(execSync('cloudron inspect'));
+
+        superagent.post('https://' + inspect.apiEndpoint + '/api/v1/developer/login').send({
+            username: username,
+            password: password
+        }).end(function (error, result) {
+            if (error) return done(error);
+            if (result.statusCode !== 200) return done(new Error('Login failed with status ' + result.statusCode));
+
+            token = result.body.token;
+
+            superagent.get('https://' + inspect.apiEndpoint + '/api/v1/profile')
+                .query({ access_token: token }).end(function (error, result) {
+                if (error) return done(error);
+                if (result.statusCode !== 200) return done(new Error('Get profile failed with status ' + result.statusCode));
+
+                email = result.body.email;
+                done();
+            });
+        });
     });
 
     it('install app', function () {
@@ -253,10 +277,10 @@ describe('Application life cycle test', function () {
         expect(app).to.be.an('object');
     });
 
-    it('can login using LDAP', function (done) {
+    it('can login using LDAP (email)', function (done) {
         browser.manage().deleteAllCookies();
         browser.get('https://' + app.fqdn);
-        browser.findElement(by.xpath('//input[@name="ldap_username" and @type="text"]')).sendKeys(username);
+        browser.findElement(by.xpath('//input[@name="ldap_username" and @type="text"]')).sendKeys(email);
         browser.findElement(by.xpath('//input[@name="ldap_password" and @type="password"]')).sendKeys(password);
         browser.findElement(by.xpath('//button[contains(text(), "Login or Register")]')).click();
         browser.wait(until.elementLocated(by.xpath('//span[contains(text(), "Differential")]')), 1000).then(function() { done(); });
