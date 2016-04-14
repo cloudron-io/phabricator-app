@@ -56,6 +56,7 @@ To hack this:
     sed -e "s/\`${DB_PREFIX}/\`dbprefixgoeshere_/" -i db_seed.sql
 ```
 * Commit db_seed.sql
+* Build the docker image again (so it has the new seed file)
 
 ## Testing
 
