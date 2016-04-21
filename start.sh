@@ -4,6 +4,11 @@ set -eu -o pipefail
 
 mkdir -p /run/phabricator/phd /run/sshd
 
+if [[ -z "${SSH_PORT:-}" ]]; then
+    echo "SSH Disabled"
+    SSH_PORT=29418
+fi
+
 # Remove _ from the prefix since phabricator adds it anyway
 sed -e "s/##MYSQL_DATABASE_PREFIX/${MYSQL_DATABASE_PREFIX%_}/" \
     -e "s/##MYSQL_USERNAME/${MYSQL_USERNAME}/" \
