@@ -18,6 +18,8 @@
     "phpmailer.mailer": "smtp",
     "phpmailer.smtp-host": "##MAIL_SERVER",
     "phpmailer.smtp-port": ##MAIL_PORT,
+    "phpmailer.smtp-user": "##MAIL_USERNAME",
+    "phpmailer.smtp-password": "##MAIL_PASSWORD",
 
     "auth.require-approval": false,
 

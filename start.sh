@@ -18,7 +18,9 @@ sed -e "s/##MYSQL_DATABASE_PREFIX/${MYSQL_DATABASE_PREFIX%_}/" \
     -e "s,##APP_ORIGIN,${APP_ORIGIN}," \
     -e "s,##MAIL_SERVER,${MAIL_SMTP_SERVER}," \
     -e "s,##MAIL_PORT,${MAIL_SMTP_PORT}," \
-    -e "s/##MAIL_FROM/${MAIL_SMTP_USERNAME}@${MAIL_DOMAIN}/" \
+    -e "s/##MAIL_FROM/${MAIL_FROM}/" \
+    -e "s/##MAIL_USERNAME/${MAIL_SMTP_USERNAME}/" \
+    -e "s/##MAIL_PASSWORD/${MAIL_SMTP_PASSWORD}/" \
     -e "s/##MAIL_DOMAIN/${MAIL_DOMAIN}/" \
     -e "s/##SSH_PORT/${SSH_PORT}/" \
     /app/code/phabricator/conf/local/local.json.template > /run/phabricator/local.json
