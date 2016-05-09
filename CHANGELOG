@@ -15,3 +15,7 @@
 
 [0.3.2]
 * Use stable branch 2016 Week 15
+
+[0.3.3]
+* Use latest smtp settings
+

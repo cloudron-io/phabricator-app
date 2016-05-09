@@ -4,7 +4,7 @@
   "author": "Phacility, Inc",
   "description": "file://DESCRIPTION.md",
   "tagline": "Phabricator, an open source, software development platform",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "healthCheckPath": "/",
   "httpPort": 8000,
   "addons": {
@@ -24,7 +24,6 @@
     }
   },
   "memoryLimit": 2147483648,
-  "targetBoxVersion": "0.4.0",
   "manifestVersion": 1,
   "website": "http://phabricator.org/",
   "contactEmail": "support@cloudron.io",
@@ -36,5 +35,6 @@
     "https://i.imgur.com/1ljeDzV.png"
   ],
   "tags": [ "git", "wiki", "chat", "project", "mercurial", "svn", "bugs", "tasks", "code review" ],
-  "changelog": "file://CHANGELOG"
+  "changelog": "file://CHANGELOG",
+  "minBoxVersion": "0.13.3"
 }
