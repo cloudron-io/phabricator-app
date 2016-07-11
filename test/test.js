@@ -153,49 +153,51 @@ describe('Application life cycle test', function () {
         browser.get('https://' + app.fqdn + '/settings/panel/ssh/');
         var publicKey = fs.readFileSync(__dirname + '/id_rsa.pub', 'utf8');
 
-        browser.findElement(by.xpath('//div[contains(text(), "Upload Public Key")]')).click();
+        browser.findElement(by.xpath('//div[contains(text(), "SSH Key Actions")]')).click();
+        browser.sleep(2000); // let the menu appear
+        browser.findElement(by.xpath('//a[contains(text(), "Upload Public Key")]')).click();
+        browser.sleep(2000); // wait for dialog to appear
         browser.findElement(by.xpath('//input[@name="name" and @type="text"]')).sendKeys('testkey');
         browser.findElement(by.xpath('//textarea[@name="key"]')).sendKeys(publicKey);
 
-        browser.findElement(by.xpath('//button[contains(text(), "Upload Public Key")]')).click().then(function () { done(); });
+        browser.findElement(by.xpath('//button[contains(text(), "Upload Public Key")]')).click().then(function () {
+            browser.sleep(2000); // wait for request to succeed before nex test
+            done();
+        });
     });
 
     it('can create repo', function (done) {
-        browser.get('https://' + app.fqdn + '/diffusion/create/');
-        browser.findElement(by.xpath('//label[.="Git"]')).click(); // "." means innerText apparently
-        browser.findElement(by.xpath('//input[@type="submit"]')).click();
+        browser.get('https://' + app.fqdn + '/diffusion/edit/form/default?vcs=git').then(function () {
+console.log('sleep');
+browser.sleep(40000);
+            browser.findElement(by.xpath('//input[@name="name" and @type="text"]')).sendKeys('testrepo');
+            browser.findElement(by.xpath('//button[contains(text(), "Create Repository")]')).click(); // "." means innerText apparently
 
-        browser.findElement(by.xpath('//input[@name="name" and @type="text"]')).sendKeys('testrepo');
-        browser.findElement(by.xpath('//input[@type="submit"]')).click();
-
-        browser.sleep(1000);
-        browser.findElement(by.xpath('//input[@type="submit"]')).click(); // permissions
-
-        browser.sleep(1000);
-        browser.findElement(by.xpath('//label[.="Create Repository Now"]')).click(); // "." means innerText apparently
-        browser.findElement(by.xpath('//input[@value="Save"]')).click(); // Done..
-
-        browser.wait(function () {
-            return browser.getCurrentUrl().then(function (url) {
-                return url === 'https://' + app.fqdn + '/diffusion/1/edit/';
-            });
-        }, 40000);
-        browser.sleep(20000).then(function () { done(); }); // it takes sometime for the repo to get created
+            browser.wait(function () {
+                return browser.getCurrentUrl().then(function (url) {
+                    return url === 'https://' + app.fqdn + '/diffusion/1/manage/';
+                });
+            }, 40000).then(function () { done(); });
+        });
     });
 
     it('displays correct clone url', function (done) {
         browser.get('https://' + app.fqdn + '/diffusion/1/');
         browser.findElement(by.xpath('//input[@type="text" and @class="diffusion-clone-uri"]')).getAttribute('value').then(function (cloneUrl) {
-            expect(cloneUrl).to.be('git clone ssh://git@' + app.fqdn + ':29418/diffusion/1/testrepo.git');
+            expect(cloneUrl).to.be('ssh://git@' + app.fqdn + ':29418/diffusion/1/testrepo.git');
             done();
         });
     });
 
     it('can push to repo', function (done) {
-        var env = Object.create(process.env);
-        env.GIT_SSH = __dirname + '/git_ssh_wrapper.sh';
-        execSync('git push -f ssh://git@' + app.fqdn + ':29418/diffusion/1/testrepo.git master', { env: env }); // push this repo
-        done();
+        browser.get('https://' + app.fqdn + '/diffusion/1/edit/activate/');
+        browser.findElement(by.xpath('//button[contains(text(), "Activate Repository")]')).click();
+        browser.sleep(20000).then(function () { // it takes sometime for the repo to get created
+            var env = Object.create(process.env);
+            env.GIT_SSH = __dirname + '/git_ssh_wrapper.sh';
+            execSync('git push -f ssh://git@' + app.fqdn + ':29418/diffusion/1/testrepo.git master', { env: env }); // push this repo
+            done();
+        });
     });
 
     it('can clone the url', function (done) {
@@ -222,7 +224,7 @@ describe('Application life cycle test', function () {
 
         browser.wait(function () {
             return browser.getCurrentUrl().then(function (url) {
-                return url === 'https://' + app.fqdn + '/F3';
+                return url.startsWith('https://' + app.fqdn + '/F3');
             });
         }, 40000).then(function () { done(); });
 
@@ -289,7 +291,7 @@ describe('Application life cycle test', function () {
     it('displays correct clone url', function (done) {
         browser.get('https://' + app.fqdn + '/diffusion/1/');
         browser.findElement(by.xpath('//input[@type="text" and @class="diffusion-clone-uri"]')).getAttribute('value').then(function (cloneUrl) {
-            expect(cloneUrl).to.be('git clone ssh://git@' + app.fqdn + ':29418/diffusion/1/testrepo.git');
+            expect(cloneUrl).to.be('ssh://git@' + app.fqdn + ':29418/diffusion/1/testrepo.git');
             done();
         });
     });
