@@ -35,6 +35,5 @@
     "https://i.imgur.com/1ljeDzV.png"
   ],
   "tags": [ "git", "wiki", "chat", "project", "mercurial", "svn", "bugs", "tasks", "code review" ],
-  "changelog": "file://CHANGELOG",
-  "minBoxVersion": "0.13.3"
+  "changelog": "file://CHANGELOG"
 }
