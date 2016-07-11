@@ -1,4 +1,4 @@
-FROM cloudron/base:0.8.0
+FROM cloudron/base:0.8.1
 MAINTAINER Girish Ramakrishnan <support@cloudron.io>
 
 RUN mkdir -p /app/code
