@@ -60,6 +60,7 @@ ADD supervisor/ /etc/supervisor/conf.d/
 
 ADD sshd_config /app/code/sshd_config
 ADD phabricator-ssh-hook.sh /app/code/phabricator-ssh-hook.sh
+ADD preamble.php /app/code/phabricator/support/preamble.php
 
 ADD start.sh /app/code/start.sh
 ADD db_seed.sql /app/code/db_seed.sql
