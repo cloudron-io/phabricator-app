@@ -26,7 +26,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 describe('Application life cycle test', function () {
     this.timeout(0);
-    var firefox = require('selenium-webdriver/firefox');
+    var firefox = require('selenium-webdriver/chrome');
     var server, browser = new firefox.Driver();
     var LOCATION = 'phabtest';
     var repodir = '/tmp/testrepo';
