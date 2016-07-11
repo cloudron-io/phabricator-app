@@ -14,8 +14,8 @@
     "mkdirp": "^0.5.1",
     "mocha": "^2.3.4",
     "rimraf": "^2.4.4",
-    "selenium-server-standalone-jar": "^2.47.1",
-    "selenium-webdriver": "^2.48.2",
+    "selenium-server-standalone-jar": "^2.53.0",
+    "selenium-webdriver": "^2.53.3",
     "superagent": "^1.4.0"
   }
 }
