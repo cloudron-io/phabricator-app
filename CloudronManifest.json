@@ -29,10 +29,10 @@
   "contactEmail": "support@cloudron.io",
   "icon": "logo.png",
   "mediaLinks": [
-    "https://i.imgur.com/nSDOv7m.png",
-    "https://i.imgur.com/XTHwqh5.png",
-    "https://i.imgur.com/8zj6efc.png",
-    "https://i.imgur.com/1ljeDzV.png"
+    "https://raw.githubusercontent.com/cloudron-io/phabricator-app/0ede37b7a8d/screenshots/1.png",
+    "https://raw.githubusercontent.com/cloudron-io/phabricator-app/0ede37b7a8d/screenshots/2.png",
+    "https://raw.githubusercontent.com/cloudron-io/phabricator-app/0ede37b7a8d/screenshots/3.png",
+    "https://raw.githubusercontent.com/cloudron-io/phabricator-app/0ede37b7a8d/screenshots/4.png"
   ],
   "tags": [ "git", "wiki", "chat", "project", "mercurial", "svn", "bugs", "tasks", "code review" ],
   "changelog": "file://CHANGELOG"
