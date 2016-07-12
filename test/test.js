@@ -167,9 +167,7 @@ describe('Application life cycle test', function () {
     });
 
     it('can create repo', function (done) {
-        browser.get('https://' + app.fqdn + '/diffusion/edit/form/default?vcs=git').then(function () {
-console.log('sleep');
-browser.sleep(40000);
+        browser.get('https://' + app.fqdn + '/diffusion/edit/form/default' + encodeURIComponent('?vcs=git')).then(function () {
             browser.findElement(by.xpath('//input[@name="name" and @type="text"]')).sendKeys('testrepo');
             browser.findElement(by.xpath('//button[contains(text(), "Create Repository")]')).click(); // "." means innerText apparently
 
