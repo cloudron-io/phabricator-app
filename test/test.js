@@ -167,16 +167,18 @@ describe('Application life cycle test', function () {
     });
 
     it('can create repo', function (done) {
-        browser.get('https://' + app.fqdn + '/diffusion/edit/form/default' + encodeURIComponent('?vcs=git')).then(function () {
-            browser.findElement(by.xpath('//input[@name="name" and @type="text"]')).sendKeys('testrepo');
-            browser.findElement(by.xpath('//button[contains(text(), "Create Repository")]')).click(); // "." means innerText apparently
+        browser.get('https://' + app.fqdn + '/diffusion/edit/');
+        browser.findElement(by.xpath('//span[contains(text(), "Create Git Repository")]')).click();
 
-            browser.wait(function () {
-                return browser.getCurrentUrl().then(function (url) {
-                    return url === 'https://' + app.fqdn + '/diffusion/1/manage/';
-                });
-            }, 40000).then(function () { done(); });
-        });
+        browser.sleep(2000); // wait for ?vcs=git to load
+        browser.findElement(by.xpath('//input[@name="name" and @type="text"]')).sendKeys('testrepo');
+        browser.findElement(by.xpath('//button[contains(text(), "Create Repository")]')).click(); // "." means innerText apparently
+
+        browser.wait(function () {
+            return browser.getCurrentUrl().then(function (url) {
+                return url === 'https://' + app.fqdn + '/diffusion/1/manage/';
+            });
+        }, 40000).then(function () { done(); });
     });
 
     it('displays correct clone url', function (done) {
